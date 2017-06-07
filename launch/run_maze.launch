@@ -1,0 +1,6 @@
+<launch>
+
+<node pkg="echo_publisher" type="echo_run_maze.py" name="Echo_maze_run" output="screen">
+</node>
+
+</launch>

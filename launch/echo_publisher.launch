@@ -1,0 +1,6 @@
+<launch>
+
+<node pkg="echo_publisher" type="echo_publisher.py" name="EchoPublisher">
+</node>
+
+</launch>

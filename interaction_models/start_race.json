@@ -1,0 +1,34 @@
+//interaction model for echo_run_race
+
+{
+  "intents": [
+    {
+      "intent": "RunRace",
+      "slots": [
+        {
+          "name": "state",
+          "type": "start_stop"
+        }
+      ]
+    }
+  ]
+}
+
+
+
+/*
+Sample Utterances:
+
+RunRace {state}
+RunRace {state} race
+
+custom types:
+
+##start-stop ##
+
+start
+stop
+
+###############
+
+*/
