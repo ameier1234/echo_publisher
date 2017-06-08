@@ -7,8 +7,10 @@ from flask_ask import Ask, statement
 
 app = Flask(__name__)
 ask = Ask(app, '/')
-pub = rospy.Publisher("StringPublisher", String, queue_size=1000)
 
+class Publishers:
+    stringPub = rospy.Publisher("String_Pub", String, queue_size=1000)
+    
 
 @ask.intent('GetStringIntent')
 def getString(string):
@@ -16,9 +18,10 @@ def getString(string):
     
     #now try and initialize a rospublisher with the input string
     try:
-        pub.publish(string)
+        Publishers.stringPub.publish(string)
     except rospy.ROSInterruptException:
         pass
+
     return statement(text).simple_card("Publish", text)
 
 def setup():
