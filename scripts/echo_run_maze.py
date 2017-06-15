@@ -2,19 +2,29 @@
 
 import rospy
 from std_msgs.msg import Bool
-from flask import Flask, render_template
+from flask import Flask, request, render_template
 from flask_ask import Ask, statement
 
 #updated to remove global variables
 app = Flask(__name__)
 ask = Ask(app, '/')
 
+def shutdown_server():
+    func = request.environ.get('werkzeug.server.shutdown')
+    if func is None:
+        raise RunTimeError('Not running with werkzeug')
+    func()
+
+@app.route('/shutdown', methods=['POST'])
+def shutdown():
+    shutdown_server()
+    return 'server shutdown'
+
+rospy.on_shutdown(shutdown)
+
 class Intents(object):
     startRacePub = rospy.Publisher("maze", Bool, queue_size=1000)
         
-        
-    def startServer(self, debug):
-        self.app.run(debug)
     
     #gets called when a RunRace intent is recieved from alexa
     global ask 
